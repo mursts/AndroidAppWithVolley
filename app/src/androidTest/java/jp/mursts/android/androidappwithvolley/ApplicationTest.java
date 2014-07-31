@@ -1,4 +1,4 @@
-package jp.mursts.android.androidappwithvolly;
+package jp.mursts.android.androidappwithvolley;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

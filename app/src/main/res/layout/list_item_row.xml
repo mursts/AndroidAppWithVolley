@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="#ffffff" >
+
+        <!-- アイコン -->
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="3dp"
+            android:layout_centerVertical="true"
+            android:layout_below="@+id/date"
+            />
+
+        <!-- 日付 -->
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            />
+
+        <!-- 予報 -->
+        <TextView
+            android:id="@+id/forecast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_below="@+id/date"
+            android:layout_marginTop="4dp" />
+
+        <!-- 気温 -->
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_below="@+id/forecast"
+            android:layout_marginTop="4dp" />
+    </RelativeLayout>
+</LinearLayout>

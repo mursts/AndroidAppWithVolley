@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.app.ListFragment;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -33,7 +32,6 @@ public class ItemFragment extends ListFragment {
 
     private LWWS mLWWS;
 
-    // TODO: Rename and change types of parameters
     public static ItemFragment newInstance() {
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
@@ -50,7 +48,6 @@ public class ItemFragment extends ListFragment {
 
         mRequestQueue.add(new JsonObjectRequest(Request.Method.GET, REQUEST_URL,
                 null, mSuccessListener, mErrorListener));
-
     }
 
     @Override
@@ -73,8 +70,14 @@ public class ItemFragment extends ListFragment {
             Gson gson = new Gson();
             mLWWS = gson.fromJson(response.toString(), LWWS.class);
 
-            setListAdapter(new ArrayAdapter<LWWS.Forecasts>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, mLWWS.getForecasts()));
+            ForecastAdapter adapter = new ForecastAdapter(getActivity(), mRequestQueue);
+
+            if(mLWWS != null) {
+                for (LWWS.Forecasts forecasts : mLWWS.getForecasts()) {
+                    adapter.add(forecasts);
+                }
+            }
+            setListAdapter(adapter);
 
         }
     };
@@ -98,9 +101,9 @@ public class ItemFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
         if (null != mListener) {
-            String temperatures =
-                mLWWS.getForecasts().get(position).getTemperatures();
-            mListener.onFragmentInteraction(temperatures);
+//            String temperatures =
+//                mLWWS.getForecasts().get(position).getTemperatures();
+//            mListener.onFragmentInteraction(temperatures);
         }
     }
 

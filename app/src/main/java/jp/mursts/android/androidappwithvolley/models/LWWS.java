@@ -83,7 +83,7 @@ public class LWWS {
                 return temperature.getMax().getCelsius() + "℃ / "
                         + temperature.getMin().getCelsius() + "℃";
             }
-            return null;
+            return "- / -";
         }
 
         public String getDatelabel() {
@@ -190,7 +190,7 @@ public class LWWS {
 
         }
 
-        private class Image {
+        public class Image {
             public String getWidth() {
                 return width;
             }

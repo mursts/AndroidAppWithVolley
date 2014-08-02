@@ -76,6 +76,16 @@ public class LWWS {
             return dateLabel + "(" + date + ") : " + telop;
         }
 
+        public String getTemperatures() {
+            Temperature.Max max = temperature.getMax();
+            Temperature.Min min = temperature.getMin();
+            if(max != null && min != null) {
+                return temperature.getMax().getCelsius() + "℃ / "
+                        + temperature.getMin().getCelsius() + "℃";
+            }
+            return null;
+        }
+
         public String getDatelabel() {
             return dateLabel;
         }

@@ -18,7 +18,6 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-import jp.mursts.android.androidappwithvolley.dummy.DummyContent;
 import jp.mursts.android.androidappwithvolley.models.LWWS;
 
 
@@ -32,6 +31,8 @@ public class ItemFragment extends ListFragment {
 
     private RequestQueue mRequestQueue;
 
+    private LWWS mLWWS;
+
     // TODO: Rename and change types of parameters
     public static ItemFragment newInstance() {
         ItemFragment fragment = new ItemFragment();
@@ -40,10 +41,6 @@ public class ItemFragment extends ListFragment {
         return fragment;
     }
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ItemFragment() {
     }
 
@@ -74,10 +71,10 @@ public class ItemFragment extends ListFragment {
         public void onResponse(JSONObject response) {
             Log.d(TAG, response.toString());
             Gson gson = new Gson();
-            LWWS lwws = gson.fromJson(response.toString(), LWWS.class);
+            mLWWS = gson.fromJson(response.toString(), LWWS.class);
 
             setListAdapter(new ArrayAdapter<LWWS.Forecasts>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, lwws.getForecasts()));
+                android.R.layout.simple_list_item_1, android.R.id.text1, mLWWS.getForecasts()));
 
         }
     };
@@ -101,24 +98,13 @@ public class ItemFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
         if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            String temperatures =
+                mLWWS.getForecasts().get(position).getTemperatures();
+            mListener.onFragmentInteraction(temperatures);
         }
     }
 
-    /**
-    * This interface must be implemented by activities that contain this
-    * fragment to allow an interaction in this fragment to be communicated
-    * to the activity and potentially other fragments contained in that
-    * activity.
-    * <p>
-    * See the Android Training lesson <a href=
-    * "http://developer.android.com/training/basics/fragments/communicating.html"
-    * >Communicating with Other Fragments</a> for more information.
-    */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onFragmentInteraction(String id);
     }
 
